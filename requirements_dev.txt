@@ -28,9 +28,7 @@ click==8.1.7
     #   safety
     #   typer
 coverage[toml]==7.4.1
-    # via
-    #   coverage
-    #   pytest-cov
+    # via pytest-cov
 cryptography==42.0.2
     # via authlib
 dparse==0.6.4b0
@@ -78,7 +76,7 @@ pbr==6.0.0
     # via stevedore
 pep8-naming==0.13.3
     # via -r requirements_dev.in
-pip-tools==7.3.0
+pip-tools==7.4.1
     # via -r requirements_dev.in
 platformdirs==4.2.0
     # via black
@@ -99,7 +97,9 @@ pyflakes==3.2.0
 pygments==2.17.2
     # via rich
 pyproject-hooks==1.0.0
-    # via build
+    # via
+    #   build
+    #   pip-tools
 pytest==8.0.0
     # via pytest-cov
 pytest-cov==4.1.0
