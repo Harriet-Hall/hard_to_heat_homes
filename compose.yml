@@ -9,7 +9,7 @@ services:
       - DEPARTMENT_NAME=[name of department]
       - DEPARTMENT_URL=[url of department]
       - REDIS_URL=redis://cache:6379
-      - SECRET_KEY=4f378500459bb58fecf903ea3c113069f11f150b33388f56fc89f7edce0e6a84
+      - SECRET_KEY=12108ce36c63d3d61fd837631eb2da71063ed296dfd3cd032e85b5bddf6012a8
       - SERVICE_NAME=[name of service]
       - SERVICE_PHASE=[phase]
       - SERVICE_URL=[url of service]
