@@ -2,6 +2,8 @@ import urllib.request
 from urllib.parse import urlencode
 import os
 from dotenv import load_dotenv
+from dummy_data import dummy_data
+import json
 
 load_dotenv()
 
@@ -23,21 +25,22 @@ def epc_call(headers, params):
         with urllib.request.urlopen(urllib.request.Request(full_url, headers=headers)) as response:
             response_body = response.read()
 
-            if len(response_body.decode()) > 0:
-                return response.status == 200
-
-            return {}
+            if len(response_body) > 0:
+                return json.loads(response_body)
+            else: return {}
     except Exception:
         return False
             
 
 def test_200_response():
-    assert epc_call(HEADERS, QUERY_PARAMS) == True
+    assert epc_call(HEADERS, QUERY_PARAMS) != ""
 
 def test_200_response_invalid_uprn():
     assert epc_call(HEADERS, {'uprn' : '123456789'}) == {}
 
 
 def test_not_200_response():
-    
     assert epc_call({}, QUERY_PARAMS) == False
+
+def test_result_is_JSON():
+    assert epc_call(HEADERS, QUERY_PARAMS) == dummy_data
