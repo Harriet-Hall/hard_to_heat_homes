@@ -16,7 +16,7 @@ HEADERS = {
         'Authorization': f'Basic {TOKEN}'
     }
 
-def epc_call(headers, params):
+def epc_api_call(headers, params):
 
     encoded_params = urlencode(params)
     full_url = f'{BASE_URL}{encoded_params}'
@@ -33,14 +33,14 @@ def epc_call(headers, params):
             
 
 def test_200_response():
-    assert epc_call(HEADERS, QUERY_PARAMS) != ""
+    assert type(epc_api_call(HEADERS, QUERY_PARAMS)) is dict
 
 def test_200_response_invalid_uprn():
-    assert epc_call(HEADERS, {'uprn' : '123456789'}) == {}
+    assert epc_api_call(HEADERS, {'uprn' : '123456789'}) == {}
 
 
 def test_not_200_response():
-    assert epc_call({}, QUERY_PARAMS) == False
+    assert epc_api_call({}, QUERY_PARAMS) == False
 
 def test_result_is_JSON():
-    assert epc_call(HEADERS, QUERY_PARAMS) == dummy_data
+    assert epc_api_call(HEADERS, QUERY_PARAMS) == dummy_data
