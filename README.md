@@ -21,7 +21,11 @@ The app is provided intentionally bare, with just the essential parts that all s
 
 ### Create a new repository
 
-[Create a new repository](https://github.com/LandRegistry/govuk-frontend-flask/generate) using this template, with the same directory structure and files. Then clone a local copy of your newly created repository.
+```shell
+python3 -m venv .
+source bin/activate
+pip install -r requirements.txt
+```
 
 ### Set local environment variables
 
