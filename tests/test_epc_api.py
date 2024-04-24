@@ -44,3 +44,8 @@ def test_not_200_response():
 
 def test_result_is_JSON():
     assert epc_api_call(HEADERS, QUERY_PARAMS) == dummy_data
+
+def test_dummy_data_address():
+    response_data = epc_api_call(HEADERS, QUERY_PARAMS)
+    assert response_data['rows'][0]['address'] == dummy_data['rows'][0]['address']
+    assert response_data['rows'][0]['address'] == "30 Alexandra Road, Muswell Hill"
