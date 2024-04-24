@@ -49,3 +49,8 @@ def test_dummy_data_address():
     response_data = epc_api_call(HEADERS, QUERY_PARAMS)
     assert response_data['rows'][0]['address'] == dummy_data['rows'][0]['address']
     assert response_data['rows'][0]['address'] == "30 Alexandra Road, Muswell Hill"
+
+def test_dummy_data_epc_rating():
+    response_data = epc_api_call(HEADERS, QUERY_PARAMS)
+    assert response_data['rows'][0]['current-energy-rating'] == dummy_data['rows'][0]['current-energy-rating']
+    assert response_data['rows'][0]['current-energy-rating'] == 'D'
