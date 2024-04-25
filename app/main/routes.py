@@ -15,21 +15,22 @@ load_dotenv()
 @bp.route("/", methods=["GET"])
 def index():
     TOKEN = os.getenv("EPC_ENCODED_API_TOKEN")
-    QUERY_PARAMS = {"uprn" : "200002791"}
+    # QUERY_PARAMS = {"uprn" : "200002791"}
+    QUERY_PARAMS = {'local-authority' :'E09000008', 'size' : '2'}
     HEADERS = {"Accept": "application/json", "Authorization": f"Basic {TOKEN}"}
-    # results_array = epc_api_call(HEADERS, QUERY_PARAMS)
-    # properties = get_props(results_array)
-    # print(f'{properties[0].uprn}')
-    epc_result = epc_api_call(HEADERS, QUERY_PARAMS)['rows'][0]
-    property = Property(
-        epc_result['uprn'],
-        epc_result["current-energy-rating"],
-        epc_result["current-energy-efficiency"],
-        epc_result["address"],
-        epc_result["postcode"]
-    )
+    array_of_properties = epc_api_call(HEADERS, {'local-authority' :'E09000008', 'size' : '50'})['rows']
+    props = get_props(array_of_properties)
+   
+    # epc_result = epc_api_call(HEADERS, QUERY_PARAMS)['rows'][0]
+    # property = Property(
+    #     epc_result['uprn'],
+    #     epc_result["current-energy-rating"],
+    #     epc_result["current-energy-efficiency"],
+    #     epc_result["address"],
+    #     epc_result["postcode"]
+    # )
 
-    return render_template("index.html", property=property)
+    return render_template("index.html", props=props)
 
 
 @bp.route("/accessibility", methods=["GET"])

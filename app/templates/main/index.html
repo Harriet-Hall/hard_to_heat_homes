@@ -24,19 +24,19 @@
         </tr>
       </thead>
       <tbody class="govuk-table__body">
-       
+        {% for prop in props %}
         <tr class="govuk-table__row">
-          <th scope="row" class="govuk-table__header">{{ property.uprn }}</th>
-          <th scope="row" class="govuk-table__header">{{ property.address }}</th>
+          <th scope="row" class="govuk-table__header">{{ prop.uprn }}</th>
+          <th scope="row" class="govuk-table__header">{{ prop.address }}</th>
           <th scope="row" class="govuk-table__header">TOID</th>
           <th scope="row" class="govuk-table__header">Connectivity</th>
           <th scope="row" class="govuk-table__header">Age</th>
           <th scope="row" class="govuk-table__header">Material</th>
-          <th scope="row" class="govuk-table__header">{{ property.epc_rating }}</th>
-          <th scope="row" class="govuk-table__header">{{ property.epc_score }}</th>
+          <th scope="row" class="govuk-table__header">{{ prop.epc_rating }}</th>
+          <th scope="row" class="govuk-table__header">{{ prop.epc_score }}</th>
           <th scope="row" class="govuk-table__header">Score</th>
         </tr>
-        
+        {% endfor %}
         
      
        
