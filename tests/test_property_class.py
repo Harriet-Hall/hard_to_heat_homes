@@ -34,6 +34,11 @@ def test_property_has_uprn_from_api_call():
 def test_property_has_EPC_rating():
     dummy_property = Property('200002791', 'D')
     assert dummy_property.epc_rating == 'D'
+
+def test_property_has_uprn_and_EPC_rating_from_api_call():
+    dummy_property = Property(epc_test_property['uprn'], epc_test_property['current-energy-rating'])
+    assert dummy_property.epc_rating == 'D'
+    assert dummy_property.uprn == '200002791'
     
 
 
