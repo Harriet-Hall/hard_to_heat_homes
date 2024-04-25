@@ -8,14 +8,18 @@ from app.main.epc_api import epc_api_call
 import os
 from dotenv import load_dotenv
 from app.main.property import Property
+from tests.test_multiple_properties import get_props
 
 load_dotenv()
 
 @bp.route("/", methods=["GET"])
 def index():
     TOKEN = os.getenv("EPC_ENCODED_API_TOKEN")
-    QUERY_PARAMS = {"uprn": "6053368"}
+    QUERY_PARAMS = {"uprn" : "200002791"}
     HEADERS = {"Accept": "application/json", "Authorization": f"Basic {TOKEN}"}
+    # results_array = epc_api_call(HEADERS, QUERY_PARAMS)
+    # properties = get_props(results_array)
+    # print(f'{properties[0].uprn}')
     epc_result = epc_api_call(HEADERS, QUERY_PARAMS)['rows'][0]
     property = Property(
         epc_result['uprn'],
@@ -24,6 +28,7 @@ def index():
         epc_result["address"],
         epc_result["postcode"]
     )
+
     return render_template("index.html", property=property)
 
 

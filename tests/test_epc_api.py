@@ -41,3 +41,5 @@ def test_dummy_data_epc_score():
     response_data = epc_api_call(HEADERS, QUERY_PARAMS)
     assert response_data['rows'][0]['current-energy-efficiency'] == dummy_data['rows'][0]['current-energy-efficiency']
     assert response_data['rows'][0]['current-energy-efficiency'] == '63'
+
+      
