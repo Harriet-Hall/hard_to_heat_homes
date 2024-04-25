@@ -4,11 +4,22 @@ from werkzeug.exceptions import HTTPException
 
 from app.main import bp
 from app.main.forms import CookiesForm
-
+from app.main.epc_api import epc_api_call
+import os
+from dotenv import load_dotenv
+from dummy_data import dummy_data
 
 @bp.route("/", methods=["GET"])
 def index():
-    return render_template("index.html")
+    TOKEN = os.getenv('EPC_ENCODED_API_TOKEN')
+    QUERY_PARAMS = {'uprn':'200002791'}
+    HEADERS = {
+        'Accept': 'application/json',
+        'Authorization': f'Basic {TOKEN}'
+    }
+    properties = epc_api_call(HEADERS, QUERY_PARAMS)
+    return render_template("index.html", properties=properties)
+    # return render_template("index.html", properties=properties)
 
 
 @bp.route("/accessibility", methods=["GET"])
