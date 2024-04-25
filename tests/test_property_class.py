@@ -2,6 +2,7 @@ from dummy_data import dummy_data
 from app.main.epc_api import epc_api_call
 import os 
 from dotenv import load_dotenv
+from app.main.property import Property
 
 load_dotenv()
 
@@ -14,12 +15,6 @@ HEADERS = {
 
 epc_test_property = epc_api_call(HEADERS, QUERY_PARAMS)['rows'][0]
 
-class Property():
-    def __init__(self, uprn, epc_rating, epc_score, address_line_one, postcode):
-        self.uprn = uprn
-        self.epc_rating = epc_rating
-        self.epc_score = epc_score
-        self.address = f'{address_line_one}, {postcode}'
 
 def test_property_has_uprn():
     dummy_property = Property('200002791', None, None, None, None)

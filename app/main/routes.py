@@ -7,11 +7,9 @@ from app.main.forms import CookiesForm
 from app.main.epc_api import epc_api_call
 import os
 from dotenv import load_dotenv
-from dummy_data import dummy_data
-from tests.test_property_class import Property
+from app.main.property import Property
 
-
-
+load_dotenv()
 
 @bp.route("/", methods=["GET"])
 def index():
@@ -23,6 +21,8 @@ def index():
         epc_result['uprn'],
         epc_result["current-energy-rating"],
         epc_result["current-energy-efficiency"],
+        epc_result["address"],
+        epc_result["postcode"]
     )
     return render_template("index.html", property=property)
 
