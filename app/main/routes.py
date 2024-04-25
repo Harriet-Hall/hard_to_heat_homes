@@ -8,18 +8,23 @@ from app.main.epc_api import epc_api_call
 import os
 from dotenv import load_dotenv
 from dummy_data import dummy_data
+from tests.test_property_class import Property
+
+
+
 
 @bp.route("/", methods=["GET"])
 def index():
-    TOKEN = os.getenv('EPC_ENCODED_API_TOKEN')
-    QUERY_PARAMS = {'uprn':'200002791'}
-    HEADERS = {
-        'Accept': 'application/json',
-        'Authorization': f'Basic {TOKEN}'
-    }
-    properties = epc_api_call(HEADERS, QUERY_PARAMS)
-    return render_template("index.html", properties=properties)
-    # return render_template("index.html", properties=properties)
+    TOKEN = os.getenv("EPC_ENCODED_API_TOKEN")
+    QUERY_PARAMS = {"uprn": "6053368"}
+    HEADERS = {"Accept": "application/json", "Authorization": f"Basic {TOKEN}"}
+    epc_result = epc_api_call(HEADERS, QUERY_PARAMS)['rows'][0]
+    property = Property(
+        epc_result['uprn'],
+        epc_result["current-energy-rating"],
+        epc_result["current-energy-efficiency"],
+    )
+    return render_template("index.html", property=property)
 
 
 @bp.route("/accessibility", methods=["GET"])
@@ -45,7 +50,9 @@ def cookies():
         response = make_response(render_template("cookies.html", form=form))
 
         # Set cookies policy for one year
-        response.set_cookie("cookies_policy", json.dumps(cookies_policy), max_age=31557600)
+        response.set_cookie(
+            "cookies_policy", json.dumps(cookies_policy), max_age=31557600
+        )
         return response
     elif request.method == "GET":
         if request.cookies.get("cookies_policy"):
